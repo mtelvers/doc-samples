@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Raven Protected Page</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css">
+    <style>
+.content { padding: 24px; }
+    </style>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+      <main class="mdl-layout__content">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <h1>Congratulations!</h1>
+            <p>
+              You've successfully signed in via Raven OAuth2.
+            </p>
+            <h3>About you</h3>
+            <p>Your name: <strong><!--#echo var="OIDC_CLAIM_name" --></strong></p>
+            <p>Your username: <strong><!--#echo var="REMOTE_USER" --></strong></p>
+            <p>
+              <!--#if expr='v("OIDC_CLAIM_picture") != ""' -->
+              Your profile picture: <img src="<!--#echo var="OIDC_CLAIM_picture" -->" />
+              <!--#else -->
+              You have no profile picture set but you can set one on your
+              <a href="https://myaccount.google.com/personal-info">G Suite@Cambridge</a> profile
+              page.
+              <!--#endif -->
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  </body>
+</html>
+<!--
+  vim:sw=2:sts=2:et:tw=99
+-->

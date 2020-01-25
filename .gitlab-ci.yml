@@ -1,0 +1,22 @@
+.docker-image-build:
+  stage: build
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
+  script:
+    - docker info
+    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}/${CI_JOB_NAME}" "${CI_JOB_NAME}"
+    - docker push "${CI_REGISTRY_IMAGE}/${CI_JOB_NAME}"
+  only:
+    refs:
+      - master
+
+apache-oauth2:
+  extends: .docker-image-build
+
+apache-saml2:
+  extends: .docker-image-build
+
+wordpress:
+  extends: .docker-image-build
