@@ -22,7 +22,6 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2/apache2.pid
 
-ENV IDP_URL https://shib.raven.cam.ac.uk/shibboleth
 ENV IDP_METADATA_CACHE_FILE ucamfederation-idp-metadata-cache.xml
 
 EXPOSE 80

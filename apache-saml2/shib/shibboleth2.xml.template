@@ -42,7 +42,7 @@
             <!--
             Configures SSO for a default IdP.
             -->
-            <SSO entityID="${IDP_URL}">
+            <SSO entityID="https://shib.raven.cam.ac.uk/shibboleth">
               SAML2
             </SSO>
 
@@ -74,7 +74,7 @@
 
         <!-- Metadata provider -->
         <MetadataProvider type="XML"
-            url="${IDP_URL}"
+            url="https://shib.raven.cam.ac.uk/shibboleth"
             backingFilePath="${IDP_METADATA_CACHE_FILE}"
             reloadInterval="14400">
         </MetadataProvider>
