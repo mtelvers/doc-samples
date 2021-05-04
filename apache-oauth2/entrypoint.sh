@@ -6,7 +6,7 @@ extra_args=""
 
 if [ -z "${OIDC_CRYPTO_PASSPHRASE}" ]; then
   echo "!! Using a temporary random value for OIDC_CRYPTO_PASSPHRASE. Set it explicitly to avoid unnecessary sign-in prompts." >&2
-  export OIDC_CRYPTO_PASSPHRASE=$(dd if=/dev/urandom of=- count=100 2>/dev/null | sha256sum - | cut -f 1 -d ' ')
+  export OIDC_CRYPTO_PASSPHRASE=$(dd if=/dev/urandom of=/dev/stdout count=100 2>/dev/null | sha256sum - | cut -f 1 -d ' ')
 fi
 
 if [ -z "${CLIENT_ID}" ]; then
