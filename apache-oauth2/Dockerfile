@@ -1,10 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 RUN set -e; \
   apt-get update -y; \
   apt-get upgrade -y; \
   apt-get install -y \
-    vim wget apache2 libssl1.0.0 libapache2-mod-auth-openidc; \
+    vim wget apache2 libssl3 libapache2-mod-auth-openidc; \
   a2enmod proxy proxy_connect proxy_http rewrite ssl auth_openidc \
     include headers; \
   a2dissite 000-default; \

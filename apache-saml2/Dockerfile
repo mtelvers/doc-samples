@@ -1,10 +1,8 @@
-FROM debian:stretch
+FROM debian:bullseye
 
-RUN echo "deb http://deb.debian.org/debian stretch-backports main" | tee /etc/apt/sources.list.d/backports.list
 RUN apt-get update \
     && apt-get dist-upgrade -y \
-    && apt-get install -y apache2 ssl-cert gettext-base \
-    && apt-get -t stretch-backports install -y libapache2-mod-shib \
+    && apt-get install -y apache2 ssl-cert gettext-base libapache2-mod-shib \
     && a2enmod include rewrite ssl shib headers \
     && a2dissite 000-default \
     && apt-get autoclean \
