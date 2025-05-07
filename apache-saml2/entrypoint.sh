@@ -10,6 +10,10 @@ else
   echo "-- Using existing shib key."
 fi
 
+service cron start
+certbot run --apache --non-interactive --no-self-upgrade --agree-tos --email $LETS_ENCRYPT_EMAIL --domain $LETS_ENCRYPT_DOMAIN
+apachectl stop
+
 extra_args=""
 
 if [ -z "${ENTITY_ID}" ]; then

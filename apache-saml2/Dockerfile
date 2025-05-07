@@ -1,12 +1,14 @@
-FROM debian:bullseye
+FROM debian:buster-slim
 
 RUN apt-get update \
     && apt-get dist-upgrade -y \
-    && apt-get install -y apache2 ssl-cert gettext-base libapache2-mod-shib \
-    && a2enmod include rewrite ssl shib headers \
+    && apt-get install -y apache2 ssl-cert gettext-base libapache2-mod-shib cron python-certbot-apache \
+    && a2enmod include rewrite ssl shib headers proxy_http \
     && a2dissite 000-default \
     && apt-get autoclean \
     && mkdir -p /etc/shibboleth/keys
+
+RUN crontab /etc/cron.d/certbot
 
 ADD entrypoint.sh /usr/local/bin
 ADD ./sites/ /etc/apache2/sites-enabled/
@@ -22,6 +24,6 @@ ENV APACHE_PID_FILE /var/run/apache2/apache2.pid
 
 ENV IDP_METADATA_CACHE_FILE ucamfederation-idp-metadata-cache.xml
 
-EXPOSE 80
+EXPOSE 80 443
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

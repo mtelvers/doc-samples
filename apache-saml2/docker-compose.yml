@@ -1,0 +1,29 @@
+services:
+  otterwiki:
+    image: redimp/otterwiki:2-slim
+    restart: unless-stopped
+    volumes:
+    - app-data:/app-data
+    environment:
+      READ_ACCESS: APPROVED
+      WRITE_ACCESS: APPROVED
+      AUTH_METHOD: PROXY_HEADER
+
+  apache-saml2:
+    build: .
+    restart: unless-stopped
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - shib-keys:/etc/shibboleth/keys
+    - letsencrypt:/etc/letsencrypt
+    environment:
+      ENTITY_ID: raven-docs-experiment-foo-bar
+      LETS_ENCRYPT_DOMAIN: otterwiki.tunbury.uk
+      LETS_ENCRYPT_EMAIL: mark@tarides.com
+
+volumes:
+  shib-keys:
+  app-data:
+  letsencrypt:
